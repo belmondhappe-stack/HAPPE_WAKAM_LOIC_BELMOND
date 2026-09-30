@@ -30,39 +30,44 @@ public partial class MainPage : ContentPage
     private void OnOperationClicked(object sender, EventArgs e)
     {
         Button btn = (Button)sender;
-        premierNombre = double.Parse(LblResultat.Text);
-        op = btn.Text;
-        LblOperation.Text = $"{premierNombre} {op}";
-        nouveauNombre = true;
+        if (double.TryParse(LblResultat.Text, out double val))
+        {
+            premierNombre = val;
+            op = btn.Text;
+            LblOperation.Text = $"{premierNombre} {op}";
+            nouveauNombre = true;
+        }
     }
 
     private void OnCalculateClicked(object sender, EventArgs e)
     {
         if (string.IsNullOrEmpty(op)) return;
 
-        double secondNombre = double.Parse(LblResultat.Text);
-        double resultat = 0;
-
-        if (op == "÷" && secondNombre == 0)
+        if (double.TryParse(LblResultat.Text, out double secondNombre))
         {
-            LblResultat.Text = "Erreur : Div / 0";
-            LblOperation.Text = "";
+            double resultat = 0;
+
+            if (op == "÷" && secondNombre == 0)
+            {
+                LblResultat.Text = "Erreur : Div / 0";
+                LblOperation.Text = "";
+                nouveauNombre = true;
+                return;
+            }
+
+            switch (op)
+            {
+                case "+": resultat = premierNombre + secondNombre; break;
+                case "-": resultat = premierNombre - secondNombre; break;
+                case "×": resultat = premierNombre * secondNombre; break;
+                case "÷": resultat = premierNombre / secondNombre; break;
+            }
+
+            LblOperation.Text = $"{premierNombre} {op} {secondNombre} =";
+            LblResultat.Text = resultat.ToString();
+            op = "";
             nouveauNombre = true;
-            return;
         }
-
-        switch (op)
-        {
-            case "+": resultat = premierNombre + secondNombre; break;
-            case "-": resultat = premierNombre - secondNombre; break;
-            case "×": resultat = premierNombre * secondNombre; break;
-            case "÷": resultat = premierNombre / secondNombre; break;
-        }
-
-        LblOperation.Text = $"{premierNombre} {op} {secondNombre} =";
-        LblResultat.Text = resultat.ToString();
-        op = "";
-        nouveauNombre = true;
     }
 
     private void OnClearClicked(object sender, EventArgs e)
