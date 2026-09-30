@@ -1,48 +1,84 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CalculatriceMaui.MainPage"
-             BackgroundColor="#1E1E1E">
+             BackgroundColor="#000000">
 
-    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="15">
+    <Grid RowDefinitions="Auto, *" Padding="20" RowSpacing="20">
 
-        <Border Grid.Row="0" Stroke="#333333" StrokeThickness="2" BackgroundColor="#2D2D2D" Padding="15">
+        <!-- Zone d'affichage stylisée (Border + ScrollView + VerticalStackLayout) -->
+        <Border Grid.Row="0" 
+                Stroke="#222222" 
+                StrokeThickness="1" 
+                BackgroundColor="#121212" 
+                Padding="20"
+                HeightRequest="150">
             <Border.StrokeShape>
-                <RoundRectangle CornerRadius="12" />
+                <RoundRectangle CornerRadius="20" />
             </Border.StrokeShape>
 
-            <ScrollView Orientation="Horizontal" HorizontalOptions="End">
+            <ScrollView Orientation="Horizontal" HorizontalOptions="End" VerticalOptions="End">
                 <VerticalStackLayout Spacing="5" HorizontalOptions="End">
-                    <Label x:Name="LblOperation" Text="" FontSize="18" TextColor="#888888" HorizontalTextAlignment="End" />
-                    <Label x:Name="LblResultat" Text="0" FontSize="40" FontAttributes="Bold" TextColor="White" HorizontalTextAlignment="End" />
+                    <Label x:Name="LblOperation" 
+                           Text="" 
+                           FontSize="22" 
+                           TextColor="#888888" 
+                           HorizontalTextAlignment="End" />
+                    <Label x:Name="LblResultat" 
+                           Text="0" 
+                           FontSize="52" 
+                           FontAttributes="Bold" 
+                           TextColor="White" 
+                           HorizontalTextAlignment="End" />
                 </VerticalStackLayout>
             </ScrollView>
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*" ColumnSpacing="10" RowSpacing="10">
+        <!-- Pavé numérique (Grid) -->
+        <Grid Grid.Row="1" 
+              ColumnDefinitions="*,*,*,*" 
+              RowDefinitions="*,*,*,*,*" 
+              ColumnSpacing="12" 
+              RowSpacing="12">
+
+            <!-- Style commun pour les boutons -->
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="CornerRadius" Value="35" />
+                    <Setter Property="FontSize" Value="24" />
+                    <Setter Property="FontAttributes" Value="Bold" />
+                </Style>
+            </Grid.Resources>
+
+            <!-- Ligne 1 -->
             <Button Text="C" Grid.Row="0" Grid.Column="0" Clicked="OnClearClicked" BackgroundColor="#A5A5A5" TextColor="Black"/>
             <Button Text="+/-" Grid.Row="0" Grid.Column="1" Clicked="OnSignClicked" BackgroundColor="#A5A5A5" TextColor="Black"/>
             <Button Text="%" Grid.Row="0" Grid.Column="2" Clicked="OnPercentClicked" BackgroundColor="#A5A5A5" TextColor="Black"/>
             <Button Text="÷" Grid.Row="0" Grid.Column="3" Clicked="OnOperationClicked" BackgroundColor="#FF9F0A" TextColor="White"/>
 
+            <!-- Ligne 2 -->
             <Button Text="7" Grid.Row="1" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="8" Grid.Row="1" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="9" Grid.Row="1" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="×" Grid.Row="1" Grid.Column="3" Clicked="OnOperationClicked" BackgroundColor="#FF9F0A" TextColor="White"/>
 
+            <!-- Ligne 3 -->
             <Button Text="4" Grid.Row="2" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="5" Grid.Row="2" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="6" Grid.Row="2" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="-" Grid.Row="2" Grid.Column="3" Clicked="OnOperationClicked" BackgroundColor="#FF9F0A" TextColor="White"/>
 
+            <!-- Ligne 4 -->
             <Button Text="1" Grid.Row="3" Grid.Column="0" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="2" Grid.Row="3" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="3" Grid.Row="3" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="+" Grid.Row="3" Grid.Column="3" Clicked="OnOperationClicked" BackgroundColor="#FF9F0A" TextColor="White"/>
 
+            <!-- Ligne 5 -->
             <Button Text="⌫" Grid.Row="4" Grid.Column="0" Clicked="OnEraseClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="0" Grid.Row="4" Grid.Column="1" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="." Grid.Row="4" Grid.Column="2" Clicked="OnNumberClicked" BackgroundColor="#333333" TextColor="White"/>
             <Button Text="=" Grid.Row="4" Grid.Column="3" Clicked="OnCalculateClicked" BackgroundColor="#FF9F0A" TextColor="White"/>
         </Grid>
     </Grid>
+
 </ContentPage>
