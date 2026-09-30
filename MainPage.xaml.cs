@@ -1,6 +1,6 @@
 using Microsoft.Maui.Controls;
 
-namespace CalculatriceMaui;
+namespace HAPPE_WAKAM_LOIC_BELMOND;
 
 public partial class MainPage : ContentPage
 {
